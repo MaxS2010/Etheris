@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"com.etheris.Etheris"
+		],
+		"client": [
+			"com.etheris.client.EtherisClient"
 		]
 	},
 	"mixins": [

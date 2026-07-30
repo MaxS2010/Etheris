@@ -2,10 +2,16 @@ package com.etheris;
 
 import net.fabricmc.api.ModInitializer;
 
+
 import net.minecraft.util.Identifier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.etheris.entity.registry.ModItems;
+import com.etheris.entity.projectiles.ModProjectiles;
+import com.etheris.command.MagicCommand;
+import com.etheris.player.PlayerMagicManager;
 
 public class Etheris implements ModInitializer {
 	public static final String MOD_ID = "etheris";
@@ -20,6 +26,10 @@ public class Etheris implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		MagicCommand.initializeCommand();
+		ModItems.registerModItems();
+		PlayerMagicManager.registerEvents();
+		ModProjectiles.registerProjectiles();
 
 		LOGGER.info("Hello Fabric world!");
 	}

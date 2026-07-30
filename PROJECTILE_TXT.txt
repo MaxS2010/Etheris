@@ -1,0 +1,260 @@
+Compiled from "ProjectileEntity.java"
+public abstract class net.minecraft.entity.projectile.ProjectileEntity extends net.minecraft.entity.Entity implements net.minecraft.entity.Ownable {
+  net.minecraft.entity.projectile.ProjectileEntity(net.minecraft.entity.EntityType<? extends net.minecraft.entity.projectile.ProjectileEntity>, net.minecraft.world.World);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: aload_2
+       3: invokespecial #48                 // Method net/minecraft/entity/Entity."<init>":(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V
+       6: return
+
+  public void setOwner(net.minecraft.entity.Entity);
+    Code:
+       0: aload_1
+       1: ifnull        17
+       4: aload_0
+       5: aload_1
+       6: invokevirtual #60                 // Method net/minecraft/entity/Entity.getUuid:()Ljava/util/UUID;
+       9: putfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+      12: aload_0
+      13: aload_1
+      14: putfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      17: return
+
+  public net.minecraft.entity.Entity getOwner();
+    Code:
+       0: aload_0
+       1: getfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+       4: ifnull        22
+       7: aload_0
+       8: getfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      11: invokevirtual #70                 // Method net/minecraft/entity/Entity.isRemoved:()Z
+      14: ifne          22
+      17: aload_0
+      18: getfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      21: areturn
+      22: aload_0
+      23: getfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+      26: ifnull        63
+      29: aload_0
+      30: invokevirtual #74                 // Method getWorld:()Lnet/minecraft/world/World;
+      33: astore_2
+      34: aload_2
+      35: instanceof    #76                 // class net/minecraft/server/world/ServerWorld
+      38: ifeq          63
+      41: aload_2
+      42: checkcast     #76                 // class net/minecraft/server/world/ServerWorld
+      45: astore_1
+      46: aload_0
+      47: aload_1
+      48: aload_0
+      49: getfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+      52: invokevirtual #80                 // Method net/minecraft/server/world/ServerWorld.getEntity:(Ljava/util/UUID;)Lnet/minecraft/entity/Entity;
+      55: putfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      58: aload_0
+      59: getfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      62: areturn
+      63: aconst_null
+      64: areturn
+
+  public net.minecraft.entity.Entity getEffectCause();
+    Code:
+       0: aload_0
+       1: invokevirtual #85                 // Method getOwner:()Lnet/minecraft/entity/Entity;
+       4: aload_0
+       5: invokestatic  #91                 // Method com/google/common/base/MoreObjects.firstNonNull:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+       8: checkcast     #4                  // class net/minecraft/entity/Entity
+      11: areturn
+
+  protected void writeCustomDataToNbt(net.minecraft.nbt.NbtCompound);
+    Code:
+       0: aload_0
+       1: getfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+       4: ifnull        17
+       7: aload_1
+       8: ldc           #96                 // String Owner
+      10: aload_0
+      11: getfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+      14: invokevirtual #102                // Method net/minecraft/nbt/NbtCompound.putUuid:(Ljava/lang/String;Ljava/util/UUID;)V
+      17: aload_0
+      18: getfield      #104                // Field leftOwner:Z
+      21: ifeq          31
+      24: aload_1
+      25: ldc           #106                // String LeftOwner
+      27: iconst_1
+      28: invokevirtual #110                // Method net/minecraft/nbt/NbtCompound.putBoolean:(Ljava/lang/String;Z)V
+      31: aload_1
+      32: ldc           #112                // String HasBeenShot
+      34: aload_0
+      35: getfield      #114                // Field shot:Z
+      38: invokevirtual #110                // Method net/minecraft/nbt/NbtCompound.putBoolean:(Ljava/lang/String;Z)V
+      41: return
+
+  protected boolean isOwner(net.minecraft.entity.Entity);
+    Code:
+       0: aload_1
+       1: invokevirtual #60                 // Method net/minecraft/entity/Entity.getUuid:()Ljava/util/UUID;
+       4: aload_0
+       5: getfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+       8: invokevirtual #123                // Method java/util/UUID.equals:(Ljava/lang/Object;)Z
+      11: ireturn
+
+  protected void readCustomDataFromNbt(net.minecraft.nbt.NbtCompound);
+    Code:
+       0: aload_1
+       1: ldc           #96                 // String Owner
+       3: invokevirtual #128                // Method net/minecraft/nbt/NbtCompound.containsUuid:(Ljava/lang/String;)Z
+       6: ifeq          24
+       9: aload_0
+      10: aload_1
+      11: ldc           #96                 // String Owner
+      13: invokevirtual #131                // Method net/minecraft/nbt/NbtCompound.getUuid:(Ljava/lang/String;)Ljava/util/UUID;
+      16: putfield      #62                 // Field ownerUuid:Ljava/util/UUID;
+      19: aload_0
+      20: aconst_null
+      21: putfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      24: aload_0
+      25: aload_1
+      26: ldc           #106                // String LeftOwner
+      28: invokevirtual #134                // Method net/minecraft/nbt/NbtCompound.getBoolean:(Ljava/lang/String;)Z
+      31: putfield      #104                // Field leftOwner:Z
+      34: aload_0
+      35: aload_1
+      36: ldc           #112                // String HasBeenShot
+      38: invokevirtual #134                // Method net/minecraft/nbt/NbtCompound.getBoolean:(Ljava/lang/String;)Z
+      41: putfield      #114                // Field shot:Z
+      44: return
+
+  public void copyFrom(net.minecraft.entity.Entity);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokespecial #138                // Method net/minecraft/entity/Entity.copyFrom:(Lnet/minecraft/entity/Entity;)V
+       5: aload_1
+       6: instanceof    #2                  // class net/minecraft/entity/projectile/ProjectileEntity
+       9: ifeq          25
+      12: aload_1
+      13: checkcast     #2                  // class net/minecraft/entity/projectile/ProjectileEntity
+      16: astore_2
+      17: aload_0
+      18: aload_2
+      19: getfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      22: putfield      #64                 // Field owner:Lnet/minecraft/entity/Entity;
+      25: return
+
+  public void tick();
+    Code:
+       0: aload_0
+       1: getfield      #114                // Field shot:Z
+       4: ifne          23
+       7: aload_0
+       8: getstatic     #145                // Field net/minecraft/world/event/GameEvent.PROJECTILE_SHOOT:Lnet/minecraft/registry/entry/RegistryEntry$Reference;
+      11: aload_0
+      12: invokevirtual #85                 // Method getOwner:()Lnet/minecraft/entity/Entity;
+      15: invokevirtual #149                // Method emitGameEvent:(Lnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/entity/Entity;)V
+      18: aload_0
+      19: iconst_1
+      20: putfield      #114                // Field shot:Z
+      23: aload_0
+      24: getfield      #104                // Field leftOwner:Z
+      27: ifne          38
+      30: aload_0
+      31: aload_0
+      32: invokevirtual #152                // Method shouldLeaveOwner:()Z
+      35: putfield      #104                // Field leftOwner:Z
+      38: aload_0
+      39: invokespecial #154                // Method net/minecraft/entity/Entity.tick:()V
+      42: return
+
+  public net.minecraft.util.math.Vec3d calculateVelocity(double, double, double, float, float);
+    Code:
+       0: new           #223                // class net/minecraft/util/math/Vec3d
+       3: dup
+       4: dload_1
+       5: dload_3
+       6: dload         5
+       8: invokespecial #226                // Method net/minecraft/util/math/Vec3d."<init>":(DDD)V
+      11: invokevirtual #229                // Method net/minecraft/util/math/Vec3d.normalize:()Lnet/minecraft/util/math/Vec3d;
+      14: aload_0
+      15: getfield      #233                // Field random:Lnet/minecraft/util/math/random/Random;
+      18: dconst_0
+      19: ldc2_w        #234                // double 0.0172275d
+      22: fload         8
+      24: f2d
+      25: dmul
+      26: invokeinterface #241,  5          // InterfaceMethod net/minecraft/util/math/random/Random.nextTriangular:(DD)D
+      31: aload_0
+      32: getfield      #233                // Field random:Lnet/minecraft/util/math/random/Random;
+      35: dconst_0
+      36: ldc2_w        #234                // double 0.0172275d
+      39: fload         8
+      41: f2d
+      42: dmul
+      43: invokeinterface #241,  5          // InterfaceMethod net/minecraft/util/math/random/Random.nextTriangular:(DD)D
+      48: aload_0
+      49: getfield      #233                // Field random:Lnet/minecraft/util/math/random/Random;
+      52: dconst_0
+      53: ldc2_w        #234                // double 0.0172275d
+      56: fload         8
+      58: f2d
+      59: dmul
+      60: invokeinterface #241,  5          // InterfaceMethod net/minecraft/util/math/random/Random.nextTriangular:(DD)D
+      65: invokevirtual #245                // Method net/minecraft/util/math/Vec3d.add:(DDD)Lnet/minecraft/util/math/Vec3d;
+      68: fload         7
+      70: f2d
+      71: invokevirtual #249                // Method net/minecraft/util/math/Vec3d.multiply:(D)Lnet/minecraft/util/math/Vec3d;
+      74: areturn
+
+  public void setVelocity(double, double, double, float, float);
+    Code:
+       0: aload_0
+       1: dload_1
+       2: dload_3
+       3: dload         5
+       5: fload         7
+       7: fload         8
+       9: invokevirtual #255                // Method calculateVelocity:(DDDFF)Lnet/minecraft/util/math/Vec3d;
+      12: astore        9
+      14: aload_0
+      15: aload         9
+      17: invokevirtual #258                // Method setVelocity:(Lnet/minecraft/util/math/Vec3d;)V
+      20: aload_0
+      21: iconst_1
+      22: putfield      #261                // Field velocityDirty:Z
+      25: aload         9
+      27: invokevirtual #265                // Method net/minecraft/util/math/Vec3d.horizontalLength:()D
+      30: dstore        10
+      32: aload_0
+      33: aload         9
+      35: getfield      #267                // Field net/minecraft/util/math/Vec3d.x:D
+      38: aload         9
+      40: getfield      #269                // Field net/minecraft/util/math/Vec3d.z:D
+      43: invokestatic  #274                // Method net/minecraft/util/math/MathHelper.atan2:(DD)D
+      46: ldc2_w        #275                // double 57.2957763671875d
+      49: dmul
+      50: d2f
+      51: invokevirtual #280                // Method setYaw:(F)V
+      54: aload_0
+      55: aload         9
+      57: getfield      #282                // Field net/minecraft/util/math/Vec3d.y:D
+      60: dload         10
+      62: invokestatic  #274                // Method net/minecraft/util/math/MathHelper.atan2:(DD)D
+      65: ldc2_w        #275                // double 57.2957763671875d
+      68: dmul
+      69: d2f
+      70: invokevirtual #285                // Method setPitch:(F)V
+      73: aload_0
+      74: aload_0
+      75: invokevirtual #289                // Method getYaw:()F
+      78: putfield      #292                // Field prevYaw:F
+      81: aload_0
+      82: aload_0
+      83: invokevirtual #295                // Method getPitch:()F
+      86: putfield      #298                // Field prevPitch:F
+      89: return
+
+  public void setVelocity(net.minecraft.entity.Entity, float, float, float, float, float);
+    Code:
+       0: fload_3
+       1: ldc_w         #309                // float 0.017453292f
+       4: fmul
