@@ -5,6 +5,7 @@ import com.etheris.player.PlayerMagicManager;
 
 import java.util.Locale;
 
+import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -76,6 +77,140 @@ public class MagicCommand {
                                 context.getSource().sendFeedback(() -> Text.literal("✦ Ether restored to full.").formatted(Formatting.AQUA), false);
                                 return 1;
                             })
+                        )
+                    )
+
+                    .then(CommandManager.literal("manipulation")
+                        // /etheris manipulation get
+                        .then(CommandManager.literal("get")
+                            .executes(context -> {
+                                ServerPlayerEntity player = context.getSource().getPlayer();
+                                if (player == null) return 0;
+
+                                PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                String value = String.format(Locale.ROOT, "%.1f", data.getManipulation());
+                                context.getSource().sendFeedback(() -> Text.literal("✦ Manipulation: ").formatted(Formatting.AQUA)
+                                        .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                return 1;
+                            })
+                        )
+                        // /etheris manipulation add <amount>
+                        .then(CommandManager.literal("add")
+                            .then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.1f))
+                                .executes(context -> {
+                                    ServerPlayerEntity player = context.getSource().getPlayer();
+                                    if (player == null) return 0;
+
+                                    float amount = FloatArgumentType.getFloat(context, "amount");
+                                    PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                    data.modifyManipulation(amount);
+
+                                    String value = String.format(Locale.ROOT, "%.1f", data.getManipulation());
+                                    context.getSource().sendFeedback(() -> Text.literal("✦ Added manipulation. Current: ").formatted(Formatting.GREEN)
+                                            .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                    return 1;
+                                })
+                            )
+                        )
+                        // /etheris manipulation remove <amount>
+                        .then(CommandManager.literal("remove")
+                            .then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.1f))
+                                .executes(context -> {
+                                    ServerPlayerEntity player = context.getSource().getPlayer();
+                                    if (player == null) return 0;
+
+                                    float amount = FloatArgumentType.getFloat(context, "amount");
+                                    PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                    data.modifyManipulation(-amount);
+
+                                    String value = String.format(Locale.ROOT, "%.1f", data.getManipulation());
+                                    context.getSource().sendFeedback(() -> Text.literal("✦ Removed manipulation. Current: ").formatted(Formatting.RED)
+                                            .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                    return 1;
+                                    
+                                })
+                            )
+                        )
+                    )
+                    .then(CommandManager.literal("maxether")
+                        .then(CommandManager.literal("get")
+                            .executes(context -> {
+                                ServerPlayerEntity player = context.getSource().getPlayer();
+                                if (player == null) return 0;
+
+                                PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                String value = String.format(Locale.ROOT, "%.1f", data.getMaxEther());
+                                context.getSource().sendFeedback(() -> Text.literal("✦ Max Ether: ").formatted(Formatting.AQUA)
+                                        .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                return 1;
+                            })
+                        )
+                        .then(CommandManager.literal("set")
+                            .then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f))
+                                .executes(context -> {
+                                    ServerPlayerEntity player = context.getSource().getPlayer();
+                                    if (player == null) return 0;
+
+                                    float amount = FloatArgumentType.getFloat(context, "amount");
+                                    PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                    data.setMaxEther(amount);
+
+                                    String value = String.format(Locale.ROOT, "%.1f", data.getMaxEther());
+                                    context.getSource().sendFeedback(() -> Text.literal("✦ Max Ether set to: ").formatted(Formatting.GREEN)
+                                            .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                    return 1;
+                                })
+                            )
+                        )
+                    )
+                    .then(CommandManager.literal("purity")
+                        .then(CommandManager.literal("get")
+                            .executes(context -> {
+                                ServerPlayerEntity player = context.getSource().getPlayer();
+                                if (player == null) return 0;
+
+                                PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                String value = String.format(Locale.ROOT, "%.1f%%", data.getPurity());
+                                context.getSource().sendFeedback(() -> Text.literal("✦ Purity: ").formatted(Formatting.LIGHT_PURPLE)
+                                        .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                return 1;
+                            })
+                        )
+                        .then(CommandManager.literal("add")
+                            .then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.1f))
+                                .executes(context -> {
+                                    ServerPlayerEntity player = context.getSource().getPlayer();
+                                    if (player == null) return 0;
+
+                                    float amount = FloatArgumentType.getFloat(context, "amount");
+                                    PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                    data.modifyPurity(amount);
+
+                                    String value = String.format(Locale.ROOT, "%.1f%%", data.getPurity());
+                                    context.getSource().sendFeedback(() -> Text.literal("✦ Added purity. Current: ").formatted(Formatting.GREEN)
+                                            .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                    return 1;
+                                })
+                            )
+                        )
+                        .then(CommandManager.literal("remove")
+                            .then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.1f))
+                                .executes(context -> {
+                                    ServerPlayerEntity player = context.getSource().getPlayer();
+                                    if (player == null) return 0;
+
+                                    float amount = FloatArgumentType.getFloat(context, "amount");
+                                    PlayerMagicData data = PlayerMagicManager.getOrCreate(player.getUuid());
+                                    data.modifyPurity(-amount);
+
+                                    String value = String.format(Locale.ROOT, "%.1f%%", data.getPurity());
+                                    context.getSource().sendFeedback(() -> Text.literal("✦ Removed purity. Current: ").formatted(Formatting.RED)
+                                            .append(Text.literal(value).formatted(Formatting.GOLD)), false);
+                                    return 1;
+                                })
+                                
+                                
+                            )
                         )
                     )
             );

@@ -4,7 +4,6 @@ import com.etheris.entity.projectiles.LightBulletEntity;
 import com.etheris.entity.registry.ModItems;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.item.ItemStack;
 
 public class LightBulletEntityRenderer extends FlyingItemEntityRenderer<LightBulletEntity> {
     public LightBulletEntityRenderer(EntityRendererFactory.Context context) {

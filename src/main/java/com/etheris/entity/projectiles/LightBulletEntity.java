@@ -44,7 +44,7 @@ public class LightBulletEntity extends ThrownItemEntity {
             discard();
         }
     }
-
+    
     public void setDamage(float damage) {
         this.damage = damage;
     }

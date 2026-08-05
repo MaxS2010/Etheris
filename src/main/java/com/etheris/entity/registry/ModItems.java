@@ -20,8 +20,8 @@ public class ModItems {
         Etheris.id("etheris_group")
     );
 
-    public static final Item FirstOre = registerItem(
-        "first_ore_ingot",
+    public static final Item TanzaniteOre = registerItem(
+        "tanzanite_ore_ingot",
         new Item(new Item.Settings())
     );
 
@@ -51,7 +51,7 @@ public class ModItems {
         );
 
         ItemGroupEvents.modifyEntriesEvent(ETHERIS_GROUP_KEY).register(entries -> {
-            entries.add(FirstOre);
+            entries.add(TanzaniteOre);
             entries.add(FirstWand);
             entries.add(LightBulletItem);
         });
