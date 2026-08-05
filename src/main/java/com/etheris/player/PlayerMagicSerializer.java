@@ -47,6 +47,7 @@ public class PlayerMagicSerializer {
         }
     }
 
+    
 // Fallback default values if any keys are missing from the map
     public static PlayerMagicData fromMap(Map<String, Float> values) {
         PlayerMagicData data = new PlayerMagicData(0f, 100f, 0f, 0f);
