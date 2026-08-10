@@ -1,33 +1,30 @@
 package com.etheris;
 
 import net.fabricmc.api.ModInitializer;
-
-
 import net.minecraft.util.Identifier;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.etheris.entity.registry.ModItems;
+import com.etheris.block.ModBlocks;
+import com.etheris.block.ModNatureRegistry;
 import com.etheris.entity.projectiles.ModProjectiles;
 import com.etheris.command.MagicCommand;
 import com.etheris.player.PlayerMagicManager;
 
 public class Etheris implements ModInitializer {
 	public static final String MOD_ID = "etheris";
-
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
 		MagicCommand.initializeCommand();
 		ModItems.registerModItems();
+
+		ModBlocks.registerModBlocks();
+
+		ModNatureRegistry.registerNatureValues(ModBlocks.MAGIC_LOG, 25.0f, 0.85f);
+		ModNatureRegistry.registerNatureValues(ModBlocks.MAGIC_LEAVES, 10.0f, 0.95f);
+
 		PlayerMagicManager.registerEvents();
 		ModProjectiles.registerProjectiles();
 
