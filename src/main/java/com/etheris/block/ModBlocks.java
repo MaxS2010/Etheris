@@ -3,19 +3,22 @@ package com.etheris.block;
 import com.etheris.Etheris;
 import com.etheris.entity.registry.ModItems;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents; // Твой правильный путь к предметам
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public class ModBlocks {
-
-    public static final Block MAGIC_LOG = registerBlock("magic_log", 
-            new Block(AbstractBlock.Settings.copy(Blocks.OAK_LOG)));
+    // TODO (Андрій): Задати ля блоків ванільних рослин значення ефіру і чистоти. Почати з убового дерева і листви. 
+    public static final Block MAGIC_LOG = registerBlock(
+            "magic_log",
+            new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG))
+    );
 
     public static final Block MAGIC_LEAVES = registerBlock("magic_leaves", 
             new Block(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).nonOpaque()));

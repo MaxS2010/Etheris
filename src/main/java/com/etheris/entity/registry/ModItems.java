@@ -35,6 +35,16 @@ public class ModItems {
         new Item(new Item.Settings())
     );
 
+    public static final Item AnalyzeWand = registerItem(
+        "analyze_wand",
+        new AnalyzeWand(new Item.Settings().maxCount(1))
+    );
+
+    public static final Item BlueOre = registerItem(
+        "blue_ore_ingot",
+        new Item(new Item.Settings())
+    );
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(
             Registries.ITEM,
@@ -54,6 +64,8 @@ public class ModItems {
             entries.add(TanzaniteOre);
             entries.add(FirstWand);
             entries.add(LightBulletItem);
+            entries.add(AnalyzeWand);
+            entries.add(BlueOre);
         });
     }
 }

@@ -1,11 +1,11 @@
 package com.etheris.command;
 
-import com.etheris.player.PlayerMagicData;
-import com.etheris.player.PlayerMagicManager;
-
 import java.util.Locale;
 
+import com.etheris.player.PlayerMagicData;
+import com.etheris.player.PlayerMagicManager;
 import com.mojang.brigadier.arguments.FloatArgumentType;
+
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,8 +24,8 @@ public class MagicCommand {
 
             dispatcher.register(
                 CommandManager.literal("etheris")
+                .then(CommandManager.literal("ether")
                     .then(CommandManager.literal("get")
-                        .then(CommandManager.literal("ether")
                             .executes(context -> {
                                 ServerPlayerEntity player = context.getSource().getPlayer();
                                 if (player == null) {
@@ -41,8 +41,8 @@ public class MagicCommand {
                             })
                         )
                     )
-                    .then(CommandManager.literal("spend")
-                        .then(CommandManager.literal("ether")
+                    .then(CommandManager.literal("ether")
+                        .then(CommandManager.literal("spend")
                             .executes(context -> {
                                 ServerPlayerEntity player = context.getSource().getPlayer();
                                 if (player == null) {
@@ -63,8 +63,8 @@ public class MagicCommand {
                             })
                         )
                     )
-                    .then(CommandManager.literal("restore")
-                        .then(CommandManager.literal("ether")
+                    .then(CommandManager.literal("ether")
+                        .then(CommandManager.literal("restore")
                             .executes(context -> {
                                 ServerPlayerEntity player = context.getSource().getPlayer();
                                 if (player == null) {
