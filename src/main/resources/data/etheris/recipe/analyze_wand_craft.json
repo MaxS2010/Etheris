@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "X": {
+      "item": "etheris:blue_ore_ingot"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "etheris:analyze_wand",
+    "count": 1
+  }
+}
