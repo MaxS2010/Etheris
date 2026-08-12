@@ -57,17 +57,18 @@ public class FirstWand extends Item {
             world.spawnEntity(bullet);
             stack.damage(1, user, EquipmentSlot.MAINHAND);
 
-            String formatted = String.format(Locale.ROOT, "%.1f", remainingEther);
-                if (remainingEther >= 0f) {
-                user.sendMessage(Text.literal("✦ Ether remaining: ").formatted(Formatting.AQUA)
-                        .append(Text.literal(formatted).formatted(Formatting.GOLD)), false);
+            // String formatted = String.format(Locale.ROOT, "%.1f", remainingEther);
+            if (remainingEther >= 0f) {
+                
+                // user.sendMessage(Text.literal("✦ Ether remaining: ").formatted(Formatting.AQUA)
+                //         .append(Text.literal(formatted).formatted(Formatting.GOLD)), false);
             } else {
                 applyOverdraftEffects(world, user, remainingEther);
                 if (remainingEther <= -300f) {
                     user.damage(world.getDamageSources().magic(), Float.MAX_VALUE);
                 }
-                user.sendMessage(Text.literal("✦ Ether overdraft! Current ether: ").formatted(Formatting.DARK_PURPLE)
-                        .append(Text.literal(formatted).formatted(Formatting.GOLD)), false);
+                // user.sendMessage(Text.literal("✦ Ether overdraft! Current ether: ").formatted(Formatting.DARK_PURPLE)
+                //         .append(Text.literal(formatted).formatted(Formatting.GOLD)), false);
             }
         }
 
