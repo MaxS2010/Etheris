@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
     "textures": {
-        "layer0": "marsadventure:item/tanzanite_arrow"
+        "layer0": "etheris:item/tanzanite_arrow"
     }
 }
