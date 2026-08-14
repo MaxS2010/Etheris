@@ -1,4 +1,3 @@
-
 package com.etheris.block;
 
 import com.etheris.Etheris;
@@ -8,7 +7,6 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,23 +14,14 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 
 public class ModBlocks {
-    // TODO (Андрій): Задати ля блоків ванільних рослин значення ефіру і чистоти. Почати з убового дерева і листви. 
     public static final Block MAGIC_LOG = registerBlock(
             "magic_log",
-            new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG))
+            new EtherPillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG), 50.0f, 1.0f)
     );
 
-    public static final Block MAGIC_LEAVES = registerBlock("magic_leaves", 
-            new Block(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).nonOpaque()));
-
-    public static final Block ETHER_BLOCK = registerBlock("ether_block",
-            new Block(AbstractBlock.Settings.create()
-                    .mapColor(MapColor.LAPIS_BLUE)
-                    .strength(3.0f, 6.0f)
-                    .requiresTool()
-                    .luminance(state -> 8)
-                    .sounds(net.minecraft.sound.BlockSoundGroup.AMETHYST_BLOCK)
-            )
+    public static final Block MAGIC_LEAVES = registerBlock(
+            "magic_leaves",
+            new EtherBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).nonOpaque(), 75.0f, 1.0f)
     );
 
     private static Block registerBlock(String name, Block block) {
@@ -49,7 +38,45 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ModItems.ETHERIS_GROUP_KEY).register(entries -> {
             entries.add(MAGIC_LOG);
             entries.add(MAGIC_LEAVES);
-            entries.add(ETHER_BLOCK);
+            // entries.add(ETHER_BLOCK);
         });
+    }
+
+    public static class EtherBlock extends Block {
+        private final float ether;
+        private final float purity;
+
+        public EtherBlock(Settings settings, float ether, float purity) {
+            super(settings);
+            this.ether = ether;
+            this.purity = purity;
+        }
+
+        public float getEther() {
+            return ether;
+        }
+
+        public float getPurity() {
+            return purity;
+        }
+    }
+
+    public static class EtherPillarBlock extends PillarBlock {
+        private final float ether;
+        private final float purity;
+
+        public EtherPillarBlock(Settings settings, float ether, float purity) {
+            super(settings);
+            this.ether = ether;
+            this.purity = purity;
+        }
+
+        public float getEther() {
+            return ether;
+        }
+
+        public float getPurity() {
+            return purity;
+        }
     }
 }
