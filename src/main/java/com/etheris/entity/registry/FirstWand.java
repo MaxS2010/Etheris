@@ -19,7 +19,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class FirstWand extends Item {
-
+    // TODO (Андрій): без SHIFT по блоку — показ магічних параметрів блоку.
     private final String material;
     private final int powerLevel;
 

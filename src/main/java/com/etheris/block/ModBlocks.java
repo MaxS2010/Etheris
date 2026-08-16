@@ -12,6 +12,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
     public static final Block MAGIC_LOG = registerBlock(
@@ -22,6 +23,15 @@ public class ModBlocks {
     public static final Block MAGIC_LEAVES = registerBlock(
             "magic_leaves",
             new EtherBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).nonOpaque(), 75.0f, 1.0f)
+    );
+
+    public static final Block TANZANITE_ORE = registerBlock(
+            "tanzanite_ore",
+            new TanzaniteOreBlock(
+                    AbstractBlock.Settings.copy(Blocks.DEEPSLATE_DIAMOND_ORE)
+                            .strength(3.0f, 3.0f),
+                    UniformIntProvider.create(3, 7)
+            )
     );
 
     private static Block registerBlock(String name, Block block) {
@@ -38,6 +48,7 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ModItems.ETHERIS_GROUP_KEY).register(entries -> {
             entries.add(MAGIC_LOG);
             entries.add(MAGIC_LEAVES);
+            entries.add(TANZANITE_ORE);
             // entries.add(ETHER_BLOCK);
         });
     }

@@ -8,6 +8,7 @@ import com.etheris.entity.registry.ModItems;
 import com.etheris.block.ModBlocks;
 import com.etheris.block.ModNatureRegistry;
 import com.etheris.entity.projectiles.ModProjectiles;
+import com.etheris.entity.mobs.ModEntities;
 import com.etheris.command.MagicCommand;
 import com.etheris.player.PlayerMagicManager;
 
@@ -27,6 +28,8 @@ public class Etheris implements ModInitializer {
 
 		PlayerMagicManager.registerEvents();
 		ModProjectiles.registerProjectiles();
+		ModEntities.registerEntities();
+		ModEntities.registerAttributes();
 
 		LOGGER.info("Hello Fabric world!");
 	}

@@ -4,5 +4,8 @@
     "item.etheris.analyze_wand": "Analyze Wand",
     "itemGroup.etheris.etheris_group": "Etheris",
     "key.etheris.open_ui": "Open Etheris UI",
-    "category.etheris.ui": "Etheris UI"
+    "category.etheris.ui": "Etheris UI",
+    "entity.etheris.ethereal_crystal": "Ethereal Crystal",
+    "entity.etheris.ethereal_wraith": "Ethereal Wraith",
+    "block.etheris.tanzanite_ore": "Tanzanite Ore"
 }
