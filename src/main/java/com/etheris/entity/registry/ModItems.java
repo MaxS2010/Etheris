@@ -47,6 +47,10 @@ public class ModItems {
         "tanzanite_rod",
         new Item(new Item.Settings())
     );
+    public static final Item AgonyWand = registerItem(
+        "file_0000000004c0820aa33c6b4005bca615",
+        new Item(new Item.Settings())
+    );
 
     public static final Item AnalyzeWand = registerItem(
         "analyze_wand",
