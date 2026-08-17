@@ -34,6 +34,19 @@ public class ModItems {
         "light_bullet_item",
         new Item(new Item.Settings())
     );
+    
+    public static final Item TanzaniteScythe = registerItem(
+        "tanzanite_scythe",
+        new Item(new Item.Settings())
+    );
+    public static final Item TanzaniteArrow = registerItem(
+        "tanzanite_arrow",
+        new Item(new Item.Settings())
+    );
+    public static final Item TanzaniteBow = registerItem(
+        "tanzanite_rod",
+        new Item(new Item.Settings())
+    );
 
     public static final Item AnalyzeWand = registerItem(
         "analyze_wand",
