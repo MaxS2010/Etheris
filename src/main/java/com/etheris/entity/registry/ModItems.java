@@ -25,6 +25,21 @@ public class ModItems {
         new Item(new Item.Settings())
     );
 
+    public static final Item TanzaniteScrap = registerItem(
+        "tanzanite_scrap",
+        new Item(new Item.Settings())
+    );
+
+    public static final Item TanzaniteCrystal = registerItem(
+        "tanzanite_crystal",
+        new Item(new Item.Settings())
+    );
+
+    public static final Item GrownStaff = registerItem(
+        "grown_staff",
+        new GrownStaff(new Item.Settings().maxCount(1))
+    );
+
     public static final Item FirstWand = registerItem(
         "magic_wand_one",
         new FirstWand(new Item.Settings().maxCount(1).maxDamage(250), "ether", 1)
@@ -79,6 +94,9 @@ public class ModItems {
 
         ItemGroupEvents.modifyEntriesEvent(ETHERIS_GROUP_KEY).register(entries -> {
             entries.add(TanzaniteOre);
+            entries.add(TanzaniteScrap);
+            entries.add(TanzaniteCrystal);
+            entries.add(GrownStaff);
             entries.add(FirstWand);
             entries.add(LightBulletItem);
             entries.add(AnalyzeWand);

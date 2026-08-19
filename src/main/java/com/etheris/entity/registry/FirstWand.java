@@ -3,15 +3,12 @@ package com.etheris.entity.registry;
 import com.etheris.entity.projectiles.LightBulletEntity;
 import com.etheris.player.PlayerMagicData;
 import com.etheris.player.PlayerMagicManager;
+
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import java.util.Locale;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
@@ -19,7 +16,6 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class FirstWand extends Item {
-    // TODO (Андрій): без SHIFT по блоку — показ магічних параметрів блоку.
     private final String material;
     private final int powerLevel;
 

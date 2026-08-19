@@ -3,6 +3,7 @@ package com.etheris.entity.registry;
 import com.etheris.entity.projectiles.LightBulletEntity;
 import com.etheris.player.PlayerMagicData;
 import com.etheris.player.PlayerMagicManager;
+
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -14,11 +15,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class DarkWand extends Item {
+public class AgonyWand extends Item {
     private final String material;
     private final int powerLevel;
 
-    public DarkWand(Settings settings, String material, int powerLevel) {
+    public AgonyWand(Settings settings, String material, int powerLevel) {
         super(settings);
         this.material = material;
         this.powerLevel = powerLevel;

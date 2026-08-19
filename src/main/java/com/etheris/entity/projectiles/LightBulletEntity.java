@@ -3,9 +3,10 @@ package com.etheris.entity.projectiles;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -14,6 +15,8 @@ import net.minecraft.world.World;
 public class LightBulletEntity extends ThrownItemEntity {
 
     private float damage = 4.0F;
+    private boolean darkBullet;
+    private int wandPowerLevel;
 
     public LightBulletEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
@@ -39,6 +42,17 @@ public class LightBulletEntity extends ThrownItemEntity {
         if (!getWorld().isClient()) {
             if (hitResult.getEntity() instanceof LivingEntity entity) {
                 entity.damage(getDamageSources().magic(), damage);
+
+            if (darkBullet) {
+                int duration = 80 + wandPowerLevel * 40;
+                int amplifier = Math.max(0, wandPowerLevel - 1);
+                entity.addStatusEffect(new StatusEffectInstance(
+                    StatusEffects.BLINDNESS, duration, 0, false, true));
+                entity.addStatusEffect(new StatusEffectInstance(
+                    StatusEffects.WITHER, duration, amplifier, false, true));
+                entity.addStatusEffect(new StatusEffectInstance(
+                    StatusEffects.POISON, duration, amplifier, false, true));
+            }
             }
 
             discard();
@@ -47,6 +61,11 @@ public class LightBulletEntity extends ThrownItemEntity {
     
     public void setDamage(float damage) {
         this.damage = damage;
+    }
+
+    public void setDarkEffects(boolean darkBullet, int wandPowerLevel) {
+        this.darkBullet = darkBullet;
+        this.wandPowerLevel = wandPowerLevel;
     }
 
     @Override

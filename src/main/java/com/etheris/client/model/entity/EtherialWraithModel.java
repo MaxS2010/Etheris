@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
 import net.minecraft.client.model.ModelPartData;
 import net.minecraft.client.model.ModelTransform;
+import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -32,6 +33,10 @@ public class EtherialWraithModel<T extends EtherialWraithEntity> extends Model {
         ModelPartData rightArm = body.addChild("right_arm", ModelPartBuilder.create()
                 .uv(24, 0).cuboid(-3.0f, -2.0f, -2.0f, 4.0f, 12.0f, 4.0f),
                 ModelTransform.pivot(-3.0f, -4.0f, 0.0f));
+    }
+
+    public static TexturedModelData getTexturedModelData() {
+        return TexturedModelData.of(MODEL_DATA, 64, 64);
     }
 
     public static final Identifier LAYER = Identifier.of("minecraft", "entity/generic");

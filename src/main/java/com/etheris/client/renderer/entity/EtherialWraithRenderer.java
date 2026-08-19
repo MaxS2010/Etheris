@@ -5,17 +5,20 @@ import com.etheris.client.model.entity.EtherialWraithModel;
 import com.etheris.entity.mobs.EtherialWraithEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class EtherialWraithRenderer extends EntityRenderer<EtherialWraithEntity> {
 
     private static final Identifier TEXTURE = Identifier.of(Etheris.MOD_ID, "textures/entity/ethereal_wraith.png");
+    public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(
+            Identifier.of(Etheris.MOD_ID, "ethereal_wraith"), "main");
     private final EtherialWraithModel<EtherialWraithEntity> model;
 
     public EtherialWraithRenderer(EntityRendererFactory.Context context) {
         super(context);
-        this.model = new EtherialWraithModel<>(new net.minecraft.client.model.ModelPart(java.util.Collections.emptyList(), java.util.Collections.emptyMap()));
+        this.model = new EtherialWraithModel<>(context.getPart(MODEL_LAYER));
     }
 
     @Override

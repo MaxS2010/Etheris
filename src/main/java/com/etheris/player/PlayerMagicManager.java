@@ -2,6 +2,8 @@ package com.etheris.player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import com.etheris.player.PlayerMagicData;
@@ -13,6 +15,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 public class PlayerMagicManager {
     private static final Map<UUID, PlayerMagicData> PLAYER_MAGIC_DATA = new HashMap<>();
+    private static final Set<UUID> ETHER_SPENT_THIS_TICK = new HashSet<>();
     private static final float REGEN_RATE_PER_TICK = 0.05f;
 
     public static PlayerMagicData createDefaultData() {
@@ -37,11 +40,20 @@ public class PlayerMagicManager {
 
     public static void tickRegeneration(ServerPlayerEntity player) {
         PlayerMagicData data = getOrCreate(player.getUuid());
+
+        if (ETHER_SPENT_THIS_TICK.remove(player.getUuid())) {
+            return;
+        }
+
         data.regenerateEther(REGEN_RATE_PER_TICK);
 
         if (data.getEther() >= 0f) {
             clearOverdraftEffects(player);
         }
+    }
+
+    public static void markEtherSpent(UUID playerId) {
+        ETHER_SPENT_THIS_TICK.add(playerId);
     }
 
     private static void clearOverdraftEffects(ServerPlayerEntity player) {

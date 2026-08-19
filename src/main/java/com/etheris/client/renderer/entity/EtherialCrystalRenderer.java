@@ -5,6 +5,7 @@ import com.etheris.client.model.entity.EtherialCrystalModel;
 import com.etheris.entity.mobs.EtherialCrystalEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -12,11 +13,13 @@ import net.minecraft.util.Identifier;
 public class EtherialCrystalRenderer extends EntityRenderer<EtherialCrystalEntity> {
 
     private static final Identifier TEXTURE = Identifier.of(Etheris.MOD_ID, "textures/entity/ethereal_crystal.png");
+        public static final EntityModelLayer MODEL_LAYER = new EntityModelLayer(
+            Identifier.of(Etheris.MOD_ID, "ethereal_crystal"), "main");
     private final EtherialCrystalModel<EtherialCrystalEntity> model;
 
     public EtherialCrystalRenderer(EntityRendererFactory.Context context) {
         super(context);
-        this.model = new EtherialCrystalModel<>(new net.minecraft.client.model.ModelPart(java.util.Collections.emptyList(), java.util.Collections.emptyMap()));
+        this.model = new EtherialCrystalModel<>(context.getPart(MODEL_LAYER));
     }
 
     @Override

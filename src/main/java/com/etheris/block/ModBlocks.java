@@ -29,7 +29,8 @@ public class ModBlocks {
             "tanzanite_ore",
             new TanzaniteOreBlock(
                     AbstractBlock.Settings.copy(Blocks.DEEPSLATE_DIAMOND_ORE)
-                            .strength(3.0f, 3.0f),
+                        .strength(3.0f, 3.0f)
+                        .requiresTool(),
                     UniformIntProvider.create(3, 7)
             )
     );
