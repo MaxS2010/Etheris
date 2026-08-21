@@ -1,5 +1,7 @@
 {
     "item.etheris.tanzanite_ore_ingot": "Tanzanite ore ingot",
+    "item.etheris.healing_wand": "Healing Wand",
+    "item.etheris.buff_wand": "Buff Wand",
     "item.etheris.tanzanite_scrap": "Tanzanite Scrap",
     "item.etheris.tanzanite_crystal": "Tanzanite Crystal",
     "item.etheris.grown_staff": "Grown Staff",
@@ -12,4 +14,5 @@
     "entity.etheris.ethereal_crystal": "Ethereal Crystal",
     "entity.etheris.ethereal_wraith": "Ethereal Wraith",
     "block.etheris.tanzanite_ore": "Tanzanite Ore"
+    
 }
