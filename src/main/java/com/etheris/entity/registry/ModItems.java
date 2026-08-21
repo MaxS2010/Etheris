@@ -63,8 +63,8 @@ public class ModItems {
         new Item(new Item.Settings())
     );
     public static final Item AgonyWand = registerItem(
-        "file_0000000004c0820aa33c6b4005bca615",
-        new Item(new Item.Settings())
+        "agony_wand",
+        new AgonyWand(new Item.Settings().maxCount(1).maxDamage(250), "agony", 3)
     );
 
     public static final Item AnalyzeWand = registerItem(
@@ -99,6 +99,7 @@ public class ModItems {
             entries.add(GrownStaff);
             entries.add(FirstWand);
             entries.add(LightBulletItem);
+            entries.add(AgonyWand);
             entries.add(AnalyzeWand);
             entries.add(BlueOre);
         });
