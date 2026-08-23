@@ -1,0 +1,14 @@
+{
+    "item.etheris.tanzanite_ore_ingot": "Tanzanite ore ingot",
+    "item.etheris.tanzanite_scrap": "Tanzanite Scrap",
+    "item.etheris.tanzanite_crystal": "Tanzanite Crystal",
+    "item.etheris.grown_staff": "Grown Staff",
+    "item.etheris.magic_wand_one": "Ether wand",
+    "item.etheris.analyze_wand": "Analyze Wand",
+    "itemGroup.etheris.etheris_group": "Etheris",
+    "key.etheris.open_ui": "Open Etheris UI",
+    "category.etheris.ui": "Etheris UI",
+    "entity.etheris.ethereal_crystal": "Ethereal Crystal",
+    "entity.etheris.ethereal_wraith": "Ethereal Wraith",
+    "block.etheris.tanzanite_ore": "Tanzanite Ore"
+}

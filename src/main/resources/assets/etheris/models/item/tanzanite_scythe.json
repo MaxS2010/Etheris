@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generate",
+  "textures": {
+    "layer0": "etheris:item/tanzanite_scythe"
+  }
+}

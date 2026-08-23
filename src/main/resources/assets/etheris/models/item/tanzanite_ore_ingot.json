@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:item/generated",
+
+    "textures": {
+        "layer0": "etheris:item/tanzanite_ore_ingot"
+    }
+}
