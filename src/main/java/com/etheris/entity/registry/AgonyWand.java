@@ -3,6 +3,7 @@ package com.etheris.entity.registry;
 import com.etheris.entity.projectiles.LightBulletEntity;
 import com.etheris.player.PlayerMagicData;
 import com.etheris.player.PlayerMagicManager;
+import com.etheris.network.ModNetworking;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -32,22 +33,24 @@ public class AgonyWand extends Item {
         if (!world.isClient()) {
             PlayerMagicData magicData = PlayerMagicManager.getOrCreate(user.getUuid());
             
-            // 🛑 Тратить більше етеру (збільшено вартість з 15f до 60f)
-            float cost = 60f; 
+            boolean bleedingSpell = ModNetworking.getSelectedSpell(user.getUuid()) == 1;
+            float cost = bleedingSpell ? 45f : 60f;
             float remainingEther = magicData.forceConsumeEther(cost);
 
             LightBulletEntity bullet = new LightBulletEntity(world, user);
             
             // Базова логіка пошкодження та швидкості з вашого коду
-            bullet.setDamage(4.0F + powerLevel * 1.5F);
+            bullet.setDamage(bleedingSpell ? 3.0F + powerLevel : 4.0F + powerLevel * 1.5F);
             float speed = 2.0F + powerLevel * 0.5F;
             bullet.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, speed, 1.0F);
             bullet.velocityDirty = true;
             bullet.velocityModified = true;
 
-            // 🌟 Прапорець для снаряда, що він повинен накласти темні ефекти при попаданні.
-            // (Цей метод і змінну ми додамо в LightBulletEntity у Частині 2)
-            bullet.setDarkEffects(true, powerLevel); 
+            if (bleedingSpell) {
+                bullet.setBleeding(true, powerLevel);
+            } else {
+                bullet.setDarkEffects(true, powerLevel);
+            }
 
             world.spawnEntity(bullet);
             stack.damage(1, user, EquipmentSlot.MAINHAND);

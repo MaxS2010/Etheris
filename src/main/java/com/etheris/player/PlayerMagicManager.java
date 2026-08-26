@@ -1,10 +1,9 @@
 package com.etheris.player;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.etheris.player.PlayerMagicData;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
@@ -14,8 +13,8 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class PlayerMagicManager {
-    private static final Map<UUID, PlayerMagicData> PLAYER_MAGIC_DATA = new HashMap<>();
-    private static final Set<UUID> ETHER_SPENT_THIS_TICK = new HashSet<>();
+    private static final Map<UUID, PlayerMagicData> PLAYER_MAGIC_DATA = new ConcurrentHashMap<>();
+    private static final Set<UUID> ETHER_SPENT_THIS_TICK = ConcurrentHashMap.newKeySet();
     private static final float REGEN_RATE_PER_TICK = 0.05f;
 
     public static PlayerMagicData createDefaultData() {

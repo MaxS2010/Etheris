@@ -1,16 +1,20 @@
 package com.etheris;
 
-import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.etheris.entity.registry.ModItems;
+
 import com.etheris.block.ModBlocks;
 import com.etheris.block.ModNatureRegistry;
-import com.etheris.entity.projectiles.ModProjectiles;
-import com.etheris.entity.mobs.ModEntities;
 import com.etheris.command.MagicCommand;
+import com.etheris.entity.mobs.ModEntities;
+import com.etheris.entity.projectiles.ModProjectiles;
+import com.etheris.entity.effect.ModEffects;
+import com.etheris.entity.registry.ModItems;
+import com.etheris.network.ModNetworking;
 import com.etheris.player.PlayerMagicManager;
+
+import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 
 public class Etheris implements ModInitializer {
 	public static final String MOD_ID = "etheris";
@@ -18,6 +22,8 @@ public class Etheris implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModNetworking.registerPayloads();
+		ModEffects.registerEffects();
 		MagicCommand.initializeCommand();
 		ModItems.registerModItems();
 

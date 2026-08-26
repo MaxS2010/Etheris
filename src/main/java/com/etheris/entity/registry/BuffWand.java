@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -32,10 +31,7 @@ public class BuffWand extends Item {
 
         PlayerMagicData magicData = PlayerMagicManager.getOrCreate(user.getUuid());
 
-        if (!magicData.consumeEther(ETHER_COST)) {
-            user.sendMessage(Text.literal("§cНедостаточно эфира! Требуется: " + (int) ETHER_COST), true);
-            return TypedActionResult.fail(itemStack);
-        }
+        magicData.forceConsumeEther(ETHER_COST);
 
         int duration = 30 * 20; // 30 секунд
 

@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import com.etheris.entity.effect.ModEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
@@ -16,6 +17,7 @@ public class LightBulletEntity extends ThrownItemEntity {
 
     private float damage = 4.0F;
     private boolean darkBullet;
+    private boolean bleedingBullet;
     private int wandPowerLevel;
 
     public LightBulletEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
@@ -53,6 +55,11 @@ public class LightBulletEntity extends ThrownItemEntity {
                 entity.addStatusEffect(new StatusEffectInstance(
                     StatusEffects.POISON, duration, amplifier, false, true));
             }
+
+                    if (bleedingBullet) {
+                    entity.addStatusEffect(new StatusEffectInstance(
+                        ModEffects.BLEEDING, 20 * 8, Math.max(0, wandPowerLevel - 2), false, true));
+                    }
             }
 
             discard();
@@ -65,6 +72,11 @@ public class LightBulletEntity extends ThrownItemEntity {
 
     public void setDarkEffects(boolean darkBullet, int wandPowerLevel) {
         this.darkBullet = darkBullet;
+        this.wandPowerLevel = wandPowerLevel;
+    }
+
+    public void setBleeding(boolean bleedingBullet, int wandPowerLevel) {
+        this.bleedingBullet = bleedingBullet;
         this.wandPowerLevel = wandPowerLevel;
     }
 

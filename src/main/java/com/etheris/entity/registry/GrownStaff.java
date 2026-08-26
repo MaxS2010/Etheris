@@ -49,9 +49,7 @@ public class GrownStaff extends Item {
         }
 
         PlayerMagicData magicData = PlayerMagicManager.getOrCreate(player.getUuid());
-        if (!magicData.consumeEther(ETHER_COST)) {
-            return;
-        }
+        magicData.forceConsumeEther(ETHER_COST);
 
         PlayerMagicManager.markEtherSpent(player.getUuid());
         if (elapsedTicks % GROWTH_INTERVAL == 0) {

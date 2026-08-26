@@ -72,6 +72,16 @@ public class ModItems {
         new AnalyzeWand(new Item.Settings().maxCount(1))
     );
 
+    public static final Item HealingWand = registerItem(
+        "healing_wand",
+        new HealingWand(new Item.Settings().maxCount(1))
+    );
+
+    public static final Item BuffWand = registerItem(
+        "buff_wand",
+        new BuffWand(new Item.Settings().maxCount(1))
+    );
+
     public static final Item BlueOre = registerItem(
         "blue_ore_ingot",
         new Item(new Item.Settings())
@@ -101,6 +111,8 @@ public class ModItems {
             entries.add(LightBulletItem);
             entries.add(AgonyWand);
             entries.add(AnalyzeWand);
+            entries.add(HealingWand);
+            entries.add(BuffWand);
             entries.add(BlueOre);
         });
     }

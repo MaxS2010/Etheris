@@ -2,8 +2,11 @@ package com.etheris.entity.registry;
 
 import com.etheris.player.PlayerMagicData;
 import com.etheris.player.PlayerMagicManager;
+import com.etheris.network.ModNetworking;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -29,12 +32,13 @@ public class HealingWand extends Item {
             return TypedActionResult.pass(stack);
         }
 
-        PlayerMagicData data = PlayerMagicManager.getOrCreate(user.getUuid());
-
-        if (!data.consumeEther(ETHER_COST)) {
-            user.sendMessage(Text.literal("Not enough ether!").formatted(Formatting.RED), true);
-            return TypedActionResult.fail(stack);
+        if (ModNetworking.getSelectedSpell(user.getUuid()) == 1) {
+            castRegeneration(world, user, hand);
+            return TypedActionResult.success(stack);
         }
+
+        PlayerMagicData data = PlayerMagicManager.getOrCreate(user.getUuid());
+        data.forceConsumeEther(ETHER_COST);
 
         float newHealth = Math.min(user.getHealth() + HEAL_AMOUNT, user.getMaxHealth());
         user.setHealth(newHealth);
@@ -42,5 +46,19 @@ public class HealingWand extends Item {
         user.sendMessage(Text.literal("+3 hearts healed").formatted(Formatting.GREEN), true);
 
         return TypedActionResult.success(stack);
+    }
+
+    public void castRegeneration(World world, PlayerEntity user, Hand hand) {
+        if (world.isClient) {
+            return;
+        }
+
+        PlayerMagicData data = PlayerMagicManager.getOrCreate(user.getUuid());
+        float etherCost = 30.0f;
+        data.forceConsumeEther(etherCost);
+
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20 * 10, 0));
+        user.getStackInHand(hand).damage(1, user, PlayerEntity.getSlotForHand(hand));
+        user.getItemCooldownManager().set(this, 20 * 10);
     }
 }
