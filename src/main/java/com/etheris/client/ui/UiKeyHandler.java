@@ -11,7 +11,7 @@ public class UiKeyHandler {
     private static final KeyBinding OPEN_UI = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.etheris.open_ui",
             InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_U,
+            GLFW.GLFW_KEY_G,
             "category.etheris.ui"
     ));
 
