@@ -2,7 +2,6 @@ package com.etheris.block;
 
 import com.etheris.Etheris;
 import com.etheris.entity.registry.ModItems;
-
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -12,26 +11,37 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 public class ModBlocks {
+
+    public static final Block OAK_LOG = registerBlock(
+            "oak_log",
+            new EtherPillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG), 10.0f, 0.8f)
+    );
+
+    public static final Block OAK_LEAVES = registerBlock(
+            "oak_leaves",
+            new EtherBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).nonOpaque(), 15.0f, 0.9f)
+    );
+
     public static final Block MAGIC_LOG = registerBlock(
             "magic_log",
             new EtherPillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_LOG), 50.0f, 1.0f)
     );
 
     public static final Block MAGIC_LEAVES = registerBlock(
-            "magic_leaves",
+            "magic_leaves", 
             new EtherBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).nonOpaque(), 75.0f, 1.0f)
     );
 
-    public static final Block TANZANITE_ORE = registerBlock(
-            "tanzanite_ore",
-            new TanzaniteOreBlock(
-                    AbstractBlock.Settings.copy(Blocks.DEEPSLATE_DIAMOND_ORE)
-                        .strength(3.0f, 3.0f)
-                        .requiresTool(),
-                    UniformIntProvider.create(3, 7)
+    public static final Block HELIODOR_ORE = registerBlock(
+            "heliodor_ore",
+            new EtherBlock(
+                    AbstractBlock.Settings.copy(Blocks.RAW_IRON_BLOCK)
+                            .requiresTool()
+                            .strength(3.0f, 3.0f), 
+                    100.0f, 
+                    1.0f
             )
     );
 
@@ -47,10 +57,17 @@ public class ModBlocks {
 
     public static void registerModBlocks() {
         ItemGroupEvents.modifyEntriesEvent(ModItems.ETHERIS_GROUP_KEY).register(entries -> {
+            // Додавання блоків
+            entries.add(OAK_LOG);
+            entries.add(OAK_LEAVES);
             entries.add(MAGIC_LOG);
             entries.add(MAGIC_LEAVES);
-            entries.add(TANZANITE_ORE);
-            // entries.add(ETHER_BLOCK);
+            entries.add(HELIODOR_ORE);
+
+            // Додавання всіх звичайних предметів у ту ж вкладку
+            entries.add(ModItems.HELIODOR_STAFF);
+            entries.add(ModItems.HELIODOR_SCRAP);
+            entries.add(ModItems.HELIODOR_SHARD);
         });
     }
 

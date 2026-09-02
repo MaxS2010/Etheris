@@ -1,13 +1,13 @@
 package com.etheris.entity.mobs;
 
 import com.etheris.Etheris;
+
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
 public class ModEntities {
 
