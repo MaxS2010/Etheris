@@ -1,6 +1,7 @@
 package com.etheris.entity.registry;
 
 import com.etheris.entity.projectiles.LightBulletEntity;
+import com.etheris.network.ModNetworking;
 import com.etheris.player.PlayerMagicData;
 import com.etheris.player.PlayerMagicManager;
 
@@ -39,13 +40,17 @@ public class FirstWand extends Item {
 
         if (!world.isClient()) {
             PlayerMagicData magicData = PlayerMagicManager.getOrCreate(user.getUuid());
-            float cost = 15f;
+
+            // slot 1 = "быстрый выстрел": дешевле, слабее урон, выше скорость
+            boolean quickShot = ModNetworking.getSelectedSpell(user.getUuid()) == 1;
+
+            float cost = quickShot ? 8f : 15f;
             float remainingEther = magicData.forceConsumeEther(cost);
 
             LightBulletEntity bullet = new LightBulletEntity(world, user);
-            bullet.setDamage(4.0F + powerLevel * 1.5F);
+            bullet.setDamage(quickShot ? 2.0F + powerLevel : 4.0F + powerLevel * 1.5F);
 
-            float speed = 2.0F + powerLevel * 0.5F;
+            float speed = quickShot ? 3.5F + powerLevel * 0.5F : 2.0F + powerLevel * 0.5F;
             bullet.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, speed, 1.0F);
             bullet.velocityDirty = true;
             bullet.velocityModified = true;
@@ -53,18 +58,11 @@ public class FirstWand extends Item {
             world.spawnEntity(bullet);
             stack.damage(1, user, EquipmentSlot.MAINHAND);
 
-            // String formatted = String.format(Locale.ROOT, "%.1f", remainingEther);
-            if (remainingEther >= 0f) {
-                
-                // user.sendMessage(Text.literal("✦ Ether remaining: ").formatted(Formatting.AQUA)
-                //         .append(Text.literal(formatted).formatted(Formatting.GOLD)), false);
-            } else {
+            if (remainingEther < 0f) {
                 applyOverdraftEffects(world, user, remainingEther);
                 if (remainingEther <= -300f) {
                     user.damage(world.getDamageSources().magic(), Float.MAX_VALUE);
                 }
-                // user.sendMessage(Text.literal("✦ Ether overdraft! Current ether: ").formatted(Formatting.DARK_PURPLE)
-                //         .append(Text.literal(formatted).formatted(Formatting.GOLD)), false);
             }
         }
 
@@ -73,7 +71,7 @@ public class FirstWand extends Item {
     }
 
     private void applyOverdraftEffects(World world, PlayerEntity user, float remainingEther) {
-        int negativeLevel = (int)Math.min(4, Math.ceil(Math.abs(remainingEther) / 10f));
+        int negativeLevel = (int) Math.min(4, Math.ceil(Math.abs(remainingEther) / 10f));
         int duration = 100 + negativeLevel * 100;
 
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, duration, negativeLevel, false, false, true));

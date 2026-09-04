@@ -1,9 +1,13 @@
 package com.etheris.command;
 
 import java.util.Locale;
-
+import com.etheris.playerclass.ClassPurchaseHandler;
+import com.etheris.playerclass.PlayerClassData;
+import com.etheris.playerclass.PlayerClassManager;
 import com.etheris.player.PlayerMagicData;
 import com.etheris.player.PlayerMagicManager;
+import com.etheris.playerclass.PlayerClassData;
+import com.etheris.playerclass.PlayerClassManager;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -213,6 +217,36 @@ public class MagicCommand {
                             )
                         )
                     )
+                    .then(CommandManager.literal("class")
+    .then(CommandManager.literal("get")
+        .executes(context -> {
+            ServerPlayerEntity player = context.getSource().getPlayer();
+            if (player == null) return 0;
+
+            PlayerClassData classData = PlayerClassManager.getOrCreate(player.getUuid());
+            if (classData.hasClass()) {
+                context.getSource().sendFeedback(() -> Text.literal("✦ Current class: ").formatted(Formatting.AQUA)
+                        .append(Text.literal(classData.getOwnedClass()).formatted(Formatting.GOLD)), false);
+            } else {
+                context.getSource().sendFeedback(() -> Text.literal("You have no class selected.").formatted(Formatting.GRAY), false);
+            }
+            return 1;
+        })
+    )
+    .then(CommandManager.literal("reset")
+        .executes(context -> {
+            ServerPlayerEntity player = context.getSource().getPlayer();
+            if (player == null) return 0;
+
+            PlayerClassData classData = PlayerClassManager.getOrCreate(player.getUuid());
+            classData.reset();
+            ClassPurchaseHandler.clearClassEffects(player);
+
+            context.getSource().sendFeedback(() -> Text.literal("✦ Your class has been reset.").formatted(Formatting.YELLOW), false);
+            return 1;
+        })
+    )
+)
             );
         });
     }

@@ -87,6 +87,21 @@ public class ModItems {
         new Item(new Item.Settings())
     );
 
+    public static final Item HELIODOR_STAFF = registerItem(
+        "heliodor_staff",
+        new Item(new Item.Settings().maxCount(1))
+    );
+
+    public static final Item HELIODOR_SCRAP = registerItem(
+        "heliodor_scrap",
+        new Item(new Item.Settings())
+    );
+
+    public static final Item HELIODOR_SHARD = registerItem(
+        "heliodor_shard",
+        new Item(new Item.Settings())
+    );
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(
             Registries.ITEM,
