@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" },
+    { "item": "etheris:heliodor_scrap" }
+  ],
+  "result": {
+    "id": "etheris:heliodor_shard",
+    "count": 1
+  }
+}
