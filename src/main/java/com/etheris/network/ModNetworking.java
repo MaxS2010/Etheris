@@ -1,6 +1,7 @@
 package com.etheris.network;
 
 import com.etheris.Etheris;
+import com.etheris.playerclass.ClassPurchaseHandler;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.RegistryByteBuf;
@@ -27,6 +28,18 @@ public final class ModNetworking {
         }
     }
 
+    public record SelectClassPayload(String classId) implements CustomPayload {
+        public static final CustomPayload.Id<SelectClassPayload> ID =
+                new CustomPayload.Id<>(Etheris.id("select_class"));
+        public static final PacketCodec<RegistryByteBuf, SelectClassPayload> CODEC =
+                PacketCodec.tuple(PacketCodecs.STRING, SelectClassPayload::classId, SelectClassPayload::new);
+
+        @Override
+        public Id<? extends CustomPayload> getId() {
+            return ID;
+        }
+    }
+
     private ModNetworking() {
     }
 
@@ -36,6 +49,10 @@ public final class ModNetworking {
             int slot = Math.max(0, Math.min(3, payload.slot()));
             SELECTED_SPELLS.put(context.player().getUuid(), slot);
         });
+
+        PayloadTypeRegistry.playC2S().register(SelectClassPayload.ID, SelectClassPayload.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(SelectClassPayload.ID, (payload, context) ->
+                ClassPurchaseHandler.handlePurchase(context.player(), payload.classId()));
     }
 
     public static int getSelectedSpell(UUID playerId) {

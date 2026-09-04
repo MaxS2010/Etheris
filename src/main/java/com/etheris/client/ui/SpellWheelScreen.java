@@ -19,6 +19,7 @@ public class SpellWheelScreen extends Screen {
             new StaffProfile(ModItems.HealingWand, 2),
             new StaffProfile(ModItems.AnalyzeWand, 1),
             new StaffProfile(ModItems.BuffWand, 1)
+            
     };
     private static final int RADIUS = 74;
     private final StaffProfile staffProfile;
