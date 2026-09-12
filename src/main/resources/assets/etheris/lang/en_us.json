@@ -13,6 +13,10 @@
     "category.etheris.ui": "Etheris UI",
     "entity.etheris.ethereal_crystal": "Ethereal Crystal",
     "entity.etheris.ethereal_wraith": "Ethereal Wraith",
-    "block.etheris.tanzanite_ore": "Tanzanite Ore"
+    "block.etheris.tanzanite_ore": "Tanzanite Ore",
+    "item.etheris.tanzanite_helmet": "Tanzanite Helmet",
+    "item.etheris.tanzanite_chestplate": "Tanzanite Chestplate",
+    "item.etheris.tanzanite_leggings": "Tanzanite Leggings",
+    "item.etheris.tanzanite_boots": "Tanzanite Boots"
     
 }

@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -102,6 +103,26 @@ public class ModItems {
         new Item(new Item.Settings())
     );
 
+    public static final Item TANZANITE_HELMET = registerItem(
+        "tanzanite_helmet",
+        new ArmorItem(ModArmorMaterials.TANZANITE, ArmorItem.Type.HELMET, new Item.Settings())
+    );
+
+    public static final Item TANZANITE_CHESTPLATE = registerItem(
+        "tanzanite_chestplate",
+        new ArmorItem(ModArmorMaterials.TANZANITE, ArmorItem.Type.CHESTPLATE, new Item.Settings())
+    );
+
+    public static final Item TANZANITE_LEGGINGS = registerItem(
+        "tanzanite_leggings",
+        new ArmorItem(ModArmorMaterials.TANZANITE, ArmorItem.Type.LEGGINGS, new Item.Settings())
+    );
+
+    public static final Item TANZANITE_BOOTS = registerItem(
+        "tanzanite_boots",
+        new ArmorItem(ModArmorMaterials.TANZANITE, ArmorItem.Type.BOOTS, new Item.Settings())
+    );
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(
             Registries.ITEM,
@@ -129,6 +150,10 @@ public class ModItems {
             entries.add(HealingWand);
             entries.add(BuffWand);
             entries.add(BlueOre);
+            entries.add(TANZANITE_HELMET);
+            entries.add(TANZANITE_CHESTPLATE);
+            entries.add(TANZANITE_LEGGINGS);
+            entries.add(TANZANITE_BOOTS);
         });
     }
 }
